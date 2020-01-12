@@ -1,5 +1,4 @@
 body {
-  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -32,9 +31,13 @@ li button:hover {
   color: #9b79fc;
 }
 
+.profile-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .profile-img {
-  border: 2px solid orange;
-  border-radius: 3px;
-  padding: 7px;
-  width: 10%;
+  width: 50%;
+  border-top-left-radius: calc(.25rem - 1px);
+  border-top-right-radius: calc(.25rem - 1px);
 }
