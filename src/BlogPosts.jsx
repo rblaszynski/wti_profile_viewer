@@ -1,11 +1,8 @@
 import React from 'react';
-import {Image, List, useLDflex, Value} from '@solid/react';
-import Email from "./Email";
+import {useLDflex} from '@solid/react';
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 
 export default function BlogPosts({author}) {
-    console.log(author);
     let [posts, pending, error] = useLDflex(`[${author}][schema:blogPost]`, true);
     let [labels] = useLDflex(`[${author}][schema:blogPost].label`, true);
     let [keywords] = useLDflex(`[${author}][schema:blogPost][schema:keywords]`, true);
@@ -36,13 +33,17 @@ export default function BlogPosts({author}) {
         return text.value;
     });
     let data = posts.map(function (x, i) {
-        return {name: labels[i], url: x, keywords: keywords[i], thumbnail: thumbnails[i], date: published[i], text: texts[i]}
+        return {
+            name: labels[i],
+            url: x,
+            keywords: keywords[i],
+            thumbnail: thumbnails[i],
+            date: published[i],
+            text: texts[i]
+        }
     });
-    console.log(data);
-    console.log(labels);
-    console.log(keywords);
     return data.map((post) => (<Card>
-        <Card.Img variant="top" src={post.thumbnail} />
+        <Card.Img variant="top" src={post.thumbnail}/>
         <Card.Body>
             <Card.Title>{post.name}</Card.Title>
             <Card.Subtitle>{post.date}</Card.Subtitle>
