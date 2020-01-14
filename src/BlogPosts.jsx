@@ -3,6 +3,7 @@ import {useLDflex} from '@solid/react';
 import Card from "react-bootstrap/Card";
 
 export default function BlogPosts({author}) {
+    author = author.replace('me', 'posts');
     let [posts, pending, error] = useLDflex(`[${author}][schema:blogPost]`, true);
     let [labels] = useLDflex(`[${author}][schema:blogPost].label`, true);
     let [keywords] = useLDflex(`[${author}][schema:blogPost][schema:keywords]`, true);

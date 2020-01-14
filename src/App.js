@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Value, Image, List} from '@solid/react';
+import {Image, List, Value} from '@solid/react';
 import Email from './Email';
 import BlogPosts from './BlogPosts';
 import {Button, Card, Col, FormControl, InputGroup, Row} from "react-bootstrap";
@@ -10,7 +10,6 @@ class App extends React.Component {
 
     state = {
         profile: 'https://robertoos1105.solid.community/profile/card#me',
-        posts: 'https://robertoos1105.solid.community/profile/card#posts',
         renderProfile: false
     };
 
@@ -18,13 +17,13 @@ class App extends React.Component {
         super();
     }
 
-    viewProfile(profile, posts) {
-        this.setState({profile: profile, posts: posts, renderProfile: true});
+    viewProfile(profile) {
+        this.setState({profile: profile, renderProfile: true});
     }
 
 
     render() {
-        const {profile, posts, renderProfile} = this.state;
+        const {profile, renderProfile} = this.state;
         return (
             <Container>
                 <Row>
@@ -40,7 +39,7 @@ class App extends React.Component {
                                     {profile: e.target.value})}
                                 />
                                 <InputGroup.Append>
-                                    <Button onClick={() => this.viewProfile(profile, posts)}
+                                    <Button onClick={() => this.viewProfile(profile)}
                                             variant="outline-secondary">View</Button>
                                 </InputGroup.Append>
                             </InputGroup>
@@ -60,7 +59,7 @@ class App extends React.Component {
                                                     <Card.Title>
                                                         Posty użytkownika
                                                     </Card.Title>
-                                                    <BlogPosts author={posts}/>
+                                                    <BlogPosts author={profile}/>
                                                 </Card>
                                             </Card.Body>
                                         </Card>
@@ -73,11 +72,11 @@ class App extends React.Component {
                                                 <Card.Text>
                                                     <List src={`[${profile}][foaf:knows]`}>{friend =>
                                                         <Card style={{padding: '10px'}}>
-                                                            <Image onClick={() => this.viewProfile(friend)}
+                                                            <Image onClick={() => this.viewProfile(friend.value)}
                                                                    className="profile-img"
                                                                    src={`[${friend}][foaf:img]`}/>
                                                             <Card.Title>
-                                                                <button onClick={() => this.viewProfile(friend)}>
+                                                                <button onClick={() => this.viewProfile(friend.value)}>
                                                                     <Value
                                                                         src={`[${friend}].name`}>{`${friend}`}</Value>
                                                                 </button>
